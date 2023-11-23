@@ -39,6 +39,46 @@ export function cartReducer(state: CartState, action: any) {
       })
     }
 
+    case ActionTypes.REMOVE_PRODUCT_BY_ID: {
+      const currentCartItem = state.cart.findIndex(cartItem => cartItem.product.id === action.payload.id)
+
+      if (currentCartItem < 0) {
+        return state
+      } 
+
+      return produce(state, draft => {
+        draft.cart.splice(currentCartItem, 1)
+      })
+    }
+
+    case ActionTypes.ADD_QUANTITY_BY_ONE: {
+      const currentCartItem = state.cart.findIndex(cartItem => cartItem.product.id === action.payload.id)
+
+      if (currentCartItem < 0) {
+        return state
+      } 
+
+      return produce(state, draft => {
+        draft.cart[currentCartItem].quantity += 1
+      })
+    }
+
+    case ActionTypes.REMOVE_QUANTITY_BY_ONE: {
+      const currentCartItem = state.cart.findIndex(cartItem => cartItem.product.id === action.payload.id)
+
+      if (currentCartItem < 0) {
+        return state
+      }
+
+      return produce(state, draft => {
+        if (draft.cart[currentCartItem].quantity === 1) {
+          draft.cart.splice(currentCartItem, 1)
+        } else {
+          draft.cart[currentCartItem].quantity = draft.cart[currentCartItem].quantity - 1
+        }
+      })
+    }
+
     default:
       return state
   }

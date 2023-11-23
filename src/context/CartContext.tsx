@@ -1,10 +1,13 @@
 import { ReactNode, createContext, useEffect, useReducer } from "react";
 import { CartItem, cartReducer } from "../reducers/cart/reducer";
-import { ActionTypes, addProductAlreadyExistsAction, addProductToCartAction } from "../reducers/cart/actions";
+import { addProductAlreadyExistsAction, addProductToCartAction, addQuantityByOneAction, removeProductByIdAction, removeQuantityByOneAction } from "../reducers/cart/actions";
 
 interface CartContextType {
   cart: CartItem[]
   AddProductToCart: (item: CartItem) => void
+  RemoveProductById: (id: string) => void
+  AddQuantityByOne: (id: string) => void
+  RemoveQuantityByOne: (id: string) => void
 }
 
 export const CartContext = createContext({} as CartContextType)
@@ -38,6 +41,18 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     }
   }
 
+  function RemoveProductById(id: string) {
+    dispatch(removeProductByIdAction(id))
+  }
+
+  function AddQuantityByOne(id: string) {
+    dispatch(addQuantityByOneAction(id))
+  }
+
+  function RemoveQuantityByOne(id: string) {
+    dispatch(removeQuantityByOneAction(id))
+  }
+
   useEffect(() => {
     const stateJSON = JSON.stringify(cartState)
     localStorage.setItem("@coffee-delivery:cart-state-1.0.0", stateJSON)
@@ -47,7 +62,10 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     <CartContext.Provider 
       value={{
         cart: cart,
-        AddProductToCart: AddProductToCart
+        AddProductToCart: AddProductToCart,
+        RemoveProductById: RemoveProductById,
+        AddQuantityByOne: AddQuantityByOne,
+        RemoveQuantityByOne: RemoveQuantityByOne
       }}
     >
       {children}

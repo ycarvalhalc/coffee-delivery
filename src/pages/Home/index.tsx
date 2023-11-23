@@ -13,6 +13,7 @@ import {
 import { products } from '../../mock/Products'
 import { ProductActionForm } from "./ProductActionForm/indext"
 import { Product } from "../../reducers/cart/reducer"
+import { FormattedNumber } from "react-intl"
 
 export function Home() {
   return (
@@ -37,7 +38,9 @@ export function Home() {
               <p>{product.description}</p>
 
               <BuyContainer>
-                <Price>R$ <span>{product.price}</span></Price>
+                <Price>
+                  <FormattedNumber style="currency" currency="BRL" value={product.price} />
+                </Price>
 
                 <ProductActionForm product={product}/>
               </BuyContainer>
