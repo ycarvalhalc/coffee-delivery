@@ -1,9 +1,9 @@
 import { OrderConfirmedContainer } from "./styles";
 
-export function OrderConfirmed() {
+export function Success() {
   return (
     <OrderConfirmedContainer>
       <h1>OrderConfirmed</h1>
-    s</OrderConfirmedContainer>
+    </OrderConfirmedContainer>
   )
 }

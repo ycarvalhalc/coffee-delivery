@@ -1,26 +1,19 @@
+import { NavigateFunction } from "react-router-dom";
+import { AddressInfo } from "../../pages/Checkout/components/AddressFormComponent";
 import { CartItem } from "./reducer";
 
 export enum ActionTypes {
-  ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART",
-  ADD_PRODUCT_ALREADY_EXISTS = "ADD_PRODUCT_ALREADY_EXISTS",
-  REMOVE_PRODUCT_BY_ID = "REMOVE_PRODUCT_BY_ID",
-  ADD_QUANTITY_BY_ONE = "ADD_QUANTITY_BY_ONE",
-  REMOVE_QUANTITY_BY_ONE = "REMOVE_QUANTITY_BY_ONE"
+  ADD_ITEM = "ADD_PRODUCT_TO_CART",
+  REMOVE_ITEM = "REMOVE_PRODUCT_BY_ID",
+  INCREMENT_ITEM_QUANTITY = "ADD_QUANTITY_BY_ONE",
+  DECREMENT_ITEM_QUANTITY = "REMOVE_QUANTITY_BY_ONE",
+  ADD_PAYMENT_METHOD = "ADD_PAYMENT_METHOD",
+  CHECKOUT = "CHECKOUT"
 }
 
-export function addProductAlreadyExistsAction(id: string, quantity: number) {
+export function addItemAction(item: CartItem) {
   return {
-    type: ActionTypes.ADD_PRODUCT_ALREADY_EXISTS,
-    payload: {
-      id,
-      quantity
-    }
-  }
-}
-
-export function addProductToCartAction(item: CartItem) {
-  return {
-    type: ActionTypes.ADD_PRODUCT_TO_CART,
+    type: ActionTypes.ADD_ITEM,
     payload: {
       item
     }
@@ -29,27 +22,46 @@ export function addProductToCartAction(item: CartItem) {
 
 export function removeProductByIdAction(id: string) {
   return {
-    type: ActionTypes.REMOVE_PRODUCT_BY_ID,
+    type: ActionTypes.REMOVE_ITEM,
     payload: {
       id
     }
   }
 }
 
-export function addQuantityByOneAction(id: string) {
+export function incrementItemQuantityAction(id: string) {
   return {
-    type: ActionTypes.ADD_QUANTITY_BY_ONE,
+    type: ActionTypes.INCREMENT_ITEM_QUANTITY,
     payload: {
       id
     }
   }
 }
 
-export function removeQuantityByOneAction(id: string) {
+export function decrementIemQuantityAction(id: string) {
   return {
-    type: ActionTypes.REMOVE_QUANTITY_BY_ONE,
+    type: ActionTypes.DECREMENT_ITEM_QUANTITY,
     payload: {
       id
+    }
+  }
+}
+
+export function addPaymentMethodAction(paymentMethod: string) {
+  return {
+    type: ActionTypes.ADD_PAYMENT_METHOD,
+    payload: {
+      paymentMethod
+    }
+  }
+}
+
+export function checkoutAction(addressInfo: AddressInfo, callback: NavigateFunction) {
+  return {
+    type: ActionTypes.CHECKOUT,
+    payload: {
+      addressInfo,
+      callback
     }
   }
 }

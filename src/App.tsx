@@ -3,7 +3,7 @@ import { Router } from "./Router"
 import { ThemeProvider } from "styled-components"
 import { GlobalStyle } from './styles/global'
 import { defaultTheme } from './styles/themes/default'
-import { CartContextProvider } from './context/CartContext'
+import { CartContextProvider } from './context/CartProvider'
 
 
 export function App() {

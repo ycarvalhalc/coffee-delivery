@@ -1,13 +1,12 @@
-import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { ShoppingCart } from "phosphor-react";
 import { ActionsContainer, HeaderContainer, Nav } from "./styles";
 
 import logoCoffeeDelivery from "../../assets/logo-coffee-delivery.svg"
-import { CartContext } from "../../context/CartContext";
+import { useCart } from "../../hooks/useCart";
 
 export function Header() {
-  const { cart } = useContext(CartContext)
+  const { cart } = useCart()
 
   const totalQuantity = cart.map((itemCart) => itemCart.quantity)
     .reduce((total, currentValue) => total + currentValue, 0)
